@@ -1,0 +1,52 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class wordcounter {
+    public static void main(String[] args) {
+        // Create a JFrame
+        JFrame frame = new JFrame("Word Counter");
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Create a text area
+        JTextArea textArea = new JTextArea();
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+
+        // Create a button
+        JButton countButton = new JButton("Count Words");
+
+        // Create a label to display the word count
+        JLabel wordCountLabel = new JLabel("Word Count: 0");
+
+        // Add action listener to the button
+        countButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Get the text from the text area
+                String text = textArea.getText().trim();
+
+                // Split the text into words
+                String[] words = text.split("\\s+");
+
+                // Update the word count label
+                if (text.isEmpty()) {
+                    wordCountLabel.setText("Word Count: 0");
+                } else {
+                    wordCountLabel.setText("Word Count: " + words.length);
+                }
+            }
+        });
+
+        // Add components to the frame
+        frame.setLayout(new BorderLayout());
+        frame.add(new JScrollPane(textArea), BorderLayout.CENTER);
+        frame.add(countButton, BorderLayout.SOUTH);
+        frame.add(wordCountLabel, BorderLayout.NORTH);
+
+        // Make the frame visible
+        frame.setVisible(true);
+    }
+}
